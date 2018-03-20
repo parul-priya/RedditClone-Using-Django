@@ -1,1 +1,29 @@
-view page!
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Create a New Post</title>
+</head>
+<body>
+
+	<h3>Create a New Post here!</h3>
+
+		{% if error %}
+			{{ error }}
+		{% endif %}
+
+	<form action="{% url 'posts:create' %}" method="POST">
+		{% csrf_token %}
+
+		<p>Title
+			<input type="text" name="username">
+		</p>
+		<p>
+			Url
+			<input type="text" name="password">
+		</p>
+		
+		<input type="submit" value="Create!">
+	</form>
+
+</body>
+</html>
