@@ -5,16 +5,19 @@
 </head>
 <body>
 
-	
-
-	<form action="{% url 'accounts:login' %}" method="POST">
-		{% csrf_token %}
-
-		<h3>Login here!</h3>
+	<h3>Login here!</h3>
 
 		{% if error %}
 			{{ error }}
 		{% endif %}
+
+	<form action="{% url 'accounts:login' %}" method="POST">
+		{% csrf_token %}
+
+		{% if request.GET.next %}
+			<input type="hidden" name="next" value={{request.GET.next}}>
+		{% endif %}
+
 
 		<p>Username
 			<input type="text" name="username">
