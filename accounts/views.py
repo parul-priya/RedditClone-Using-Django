@@ -28,9 +28,11 @@ def signup(request) :
 
 def loginview(request) :
 	if request.method == 'POST' :
+
 		try :
+
 			user = User.objects.get(username=request.POST['username'])
-	
+
 			user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
 
 			if user is not None:
@@ -41,7 +43,7 @@ def loginview(request) :
 				return render(request, 'accounts/login.html', {'error' : "Username and Password didn't match! Try Again."})
 
 		except User.DoesNotExist :
-			return HttpResponseRedirect("/signup/", {'error' : "You need to signup first!"})
+			return render(request, 'accounts/signupagain.html')
 		
 	else :
 		return render(request, 'accounts/login.html')
